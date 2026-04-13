@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "immersion-flashcards"
+version = "0.1.0"
+description = "Screen recorder for language review — captures video for subtitle extraction and flashcard generation"
+requires-python = ">=3.11"
+dependencies = [
+    "PyQt6>=6.6",
+    "ffmpeg-python>=0.2",
+]
+
+[project.scripts]
+immersion-flashcards = "src.main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4", "SIM"]
+ignore = ["E501"]

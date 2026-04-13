@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bash .specify/scripts/bash/setup-plan.sh --json)",
+      "Bash(bash .specify/scripts/bash/check-prerequisites.sh --json)",
+      "Bash(bash .specify/scripts/bash/check-prerequisites.sh --json --require-tasks --include-tasks)",
+      "Bash(python -m pytest tests/unit/recorder/test_models.py tests/unit/settings/test_models.py tests/unit/settings/test_settings_manager.py -v)",
+      "Bash(pip install:*)",
+      "Bash(pip show:*)",
+      "Bash(python -c \"import PyQt6; print\\(PyQt6.__file__\\)\")",
+      "Bash(python -c \"import os; import PyQt6; qt6=os.path.join\\(os.path.dirname\\(PyQt6.__file__\\), 'Qt6'\\); print\\(os.listdir\\(qt6\\)\\)\")",
+      "Bash(python -c \"from PyQt6.QtCore import QObject; print\\('QtCore OK'\\)\")"
+    ]
+  }
+}
