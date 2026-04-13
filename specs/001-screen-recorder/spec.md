@@ -102,6 +102,9 @@ display content only.
 - What happens when the display configuration changes mid-recording (monitor unplugged)? The
   application MUST continue recording from the remaining display and notify the user of the
   change.
+- What happens when the user launches the application while it is already running?
+  The second launch MUST show a brief "already running" notice and exit immediately —
+  it MUST NOT open a second window or silently fail.
 
 ## Requirements *(mandatory)*
 
@@ -133,6 +136,10 @@ display content only.
   start (e.g., invalid save folder, insufficient disk space, permission denied).
 - **FR-014**: The application MUST preserve any footage already captured if a recording is
   interrupted unexpectedly (system sleep, crash, disk full).
+- **FR-015**: The application MUST prevent more than one instance from running
+  simultaneously. If a second instance is launched while one is already running,
+  it MUST display a clear message to the user and exit without opening a second window.
+  *(Edge-case-derived — no primary user story; see Edge Cases section.)*
 
 ### Key Entities
 
