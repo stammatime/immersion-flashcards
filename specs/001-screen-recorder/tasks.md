@@ -26,12 +26,12 @@ testing of each story.
 
 **Purpose**: Project initialization and basic structure. No story label — required by all stories.
 
-- [ ] T001 Create pyproject.toml with Python 3.11 project metadata, pytest configuration (testpaths, python_files), and ruff linting settings in pyproject.toml
-- [ ] T002 [P] Create requirements.txt with pinned dependencies: PyQt6>=6.6, ffmpeg-python>=0.2 in requirements.txt
-- [ ] T003 [P] Create requirements-dev.txt with development dependencies: pytest>=8, pytest-qt>=4, ruff>=0.4 in requirements-dev.txt
-- [ ] T004 [P] Create src/ package hierarchy with empty __init__.py files: src/__init__.py, src/recorder/__init__.py, src/settings/__init__.py, src/ui/__init__.py
-- [ ] T005 [P] Create tests/ directory hierarchy with empty __init__.py files: tests/__init__.py, tests/unit/__init__.py, tests/unit/recorder/__init__.py, tests/unit/settings/__init__.py, tests/integration/__init__.py
-- [ ] T006 [P] Create tests/conftest.py with a session-scoped QApplication fixture required by all PyQt widget tests
+- [x] T001 Create pyproject.toml with Python 3.11 project metadata, pytest configuration (testpaths, python_files), and ruff linting settings in pyproject.toml
+- [x] T002 [P] Create requirements.txt with pinned dependencies: PyQt6>=6.6, ffmpeg-python>=0.2 in requirements.txt
+- [x] T003 [P] Create requirements-dev.txt with development dependencies: pytest>=8, pytest-qt>=4, ruff>=0.4 in requirements-dev.txt
+- [x] T004 [P] Create src/ package hierarchy with empty __init__.py files: src/__init__.py, src/recorder/__init__.py, src/settings/__init__.py, src/ui/__init__.py
+- [x] T005 [P] Create tests/ directory hierarchy with empty __init__.py files: tests/__init__.py, tests/unit/__init__.py, tests/unit/recorder/__init__.py, tests/unit/settings/__init__.py, tests/integration/__init__.py
+- [x] T006 [P] Create tests/conftest.py with a session-scoped QApplication fixture required by all PyQt widget tests
 
 ---
 
@@ -41,13 +41,13 @@ testing of each story.
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete.
 
-- [ ] T007 Write failing unit tests for RecordingStatus enum (all 6 states), Recording dataclass (field defaults, state invariants), and Display dataclass in tests/unit/recorder/test_models.py
-- [ ] T008 Implement RecordingStatus enum (IDLE, RECORDING, STOPPING, COMPLETE, PARTIAL, FAILED) and Recording, Display dataclasses in src/recorder/models.py — verify T007 tests fail before starting, pass after
-- [ ] T009 [P] Implement RecorderStateError, DiskSpaceError, FFmpegNotFoundError exception classes in src/recorder/exceptions.py
-- [ ] T010 [P] Write failing unit tests for Settings dataclass (default values, save_directory defaults to None, selected_display_id defaults to None) in tests/unit/settings/test_models.py
-- [ ] T011 [P] Implement Settings dataclass with save_directory (Path | None), selected_display_id (str | None), app_version (str) fields in src/settings/models.py — verify T010 tests fail before starting, pass after
-- [ ] T012 Write failing unit tests for SettingsManager: load() returns defaults on missing file, load() resets invalid save_directory, save() writes valid JSON to tmp_path, default_save_directory() returns platform path in tests/unit/settings/test_settings_manager.py
-- [ ] T013 Implement SettingsManager with load() (defaults on missing/malformed file, resets invalid paths), save() (atomic write via temp file + rename), and default_save_directory() (Videos on Windows, Movies on macOS) in src/settings/settings_manager.py — verify T012 tests fail before starting, pass after
+- [x] T007 Write failing unit tests for RecordingStatus enum (all 6 states), Recording dataclass (field defaults, state invariants), and Display dataclass in tests/unit/recorder/test_models.py
+- [x] T008 Implement RecordingStatus enum (IDLE, RECORDING, STOPPING, COMPLETE, PARTIAL, FAILED) and Recording, Display dataclasses in src/recorder/models.py — verify T007 tests fail before starting, pass after
+- [x] T009 [P] Implement RecorderStateError, DiskSpaceError, FFmpegNotFoundError exception classes in src/recorder/exceptions.py
+- [x] T010 [P] Write failing unit tests for Settings dataclass (default values, save_directory defaults to None, selected_display_id defaults to None) in tests/unit/settings/test_models.py
+- [x] T011 [P] Implement Settings dataclass with save_directory (Path | None), selected_display_id (str | None), app_version (str) fields in src/settings/models.py — verify T010 tests fail before starting, pass after
+- [x] T012 Write failing unit tests for SettingsManager: load() returns defaults on missing file, load() resets invalid save_directory, save() writes valid JSON to tmp_path, default_save_directory() returns platform path in tests/unit/settings/test_settings_manager.py
+- [x] T013 Implement SettingsManager with load() (defaults on missing/malformed file, resets invalid paths), save() (atomic write via temp file + rename), and default_save_directory() (Videos on Windows, Movies on macOS) in src/settings/settings_manager.py — verify T012 tests fail before starting, pass after
 
 **Checkpoint**: Foundation ready — models, exceptions, and settings persistence are all tested and passing. User story implementation can now begin.
 
@@ -63,21 +63,21 @@ MP4 in their save folder.
 
 ### Tests for User Story 1 ⚠️ Write these first — they MUST FAIL before implementation
 
-- [ ] T014 [P] [US1] Write failing unit tests for ScreenRecorder with mocked FFmpeg subprocess: start() builds correct platform args (gdigrab on Windows / avfoundation on macOS), transitions to RECORDING state, stop() terminates process and transitions to COMPLETE state in tests/unit/recorder/test_screen_recorder.py
-- [ ] T015 [P] [US1] Write failing integration test: instantiate ScreenRecorder with real FFmpeg, call start() on primary display, sleep 2s, call stop(), assert returned Recording has status COMPLETE and save_path points to a readable MP4 with duration > 1s in tests/integration/test_recording_flow.py
+- [x] T014 [P] [US1] Write failing unit tests for ScreenRecorder with mocked FFmpeg subprocess: start() builds correct platform args (gdigrab on Windows / avfoundation on macOS), transitions to RECORDING state, stop() terminates process and transitions to COMPLETE state in tests/unit/recorder/test_screen_recorder.py
+- [x] T015 [P] [US1] Write failing integration test: instantiate ScreenRecorder with real FFmpeg, call start() on primary display, sleep 2s, call stop(), assert returned Recording has status COMPLETE and save_path points to a readable MP4 with duration > 1s in tests/integration/test_recording_flow.py
 
 ### Implementation for User Story 1
 
-- [ ] T016 [US1] Implement DisplayEnumerator.list_displays() — query QApplication.screens(), map each QScreen to a Display model (id=screen.name(), label, width, height, x, y, is_primary, scale_factor) in src/recorder/display_enumerator.py
-- [ ] T017 [US1] Implement ScreenRecorder.__init__(settings), status (RecordingStatus property), current_recording (Recording | None property), elapsed_seconds (float property) in src/recorder/screen_recorder.py
-- [ ] T018 [US1] Implement ScreenRecorder.start(display: Display): validate save_directory writable, build FFmpeg args for platform (gdigrab offset+size on Windows; avfoundation display index on macOS), spawn subprocess, set Recording with start_time, transition to RECORDING, emit status_changed in src/recorder/screen_recorder.py
-- [ ] T019 [US1] Implement ScreenRecorder.stop(): send SIGTERM to FFmpeg subprocess, await exit, set end_time, transition to COMPLETE (exit 0) or FAILED (exit non-zero) or PARTIAL (file > 0 bytes on unexpected termination), emit status_changed and recording_completed in src/recorder/screen_recorder.py
-- [ ] T020 [US1] Implement elapsed timer: QTimer(interval=1000) started on RECORDING, stopped on any terminal state, emitting elapsed_updated(float) signal each tick in src/recorder/screen_recorder.py
-- [ ] T021 [US1] Implement unexpected-termination handler: monitor FFmpeg subprocess exit while in RECORDING state (QTimer or QProcess), transition to PARTIAL if file > 0 bytes, emit error_occurred with message in src/recorder/screen_recorder.py
-- [ ] T022 [US1] Implement MainWindow skeleton in src/ui/main_window.py: status indicator (QLabel with colored dot — grey=Idle, red=Recording, orange=Stopping), elapsed timer label (QLabel, MM:SS format, resets to 00:00 on IDLE), Start/Stop QPushButton following UI state machine from contracts/ui-states.md
-- [ ] T023 [US1] Wire ScreenRecorder Qt signals to MainWindow: status_changed → update indicator label + button text/enabled state; elapsed_updated → update timer label; recording_completed → log completion in src/ui/main_window.py
-- [ ] T024 [US1] Implement error dialog handler in MainWindow: on error_occurred signal, show QMessageBox.critical with the message, log structured event (event, message, recording_id, timestamp) in src/ui/main_window.py
-- [ ] T025 [US1] Implement src/main.py: create QApplication, instantiate SettingsManager and call load(), instantiate ScreenRecorder(settings), instantiate MainWindow(recorder, settings_manager), show window, call app.exec()
+- [x] T016 [US1] Implement DisplayEnumerator.list_displays() — query QApplication.screens(), map each QScreen to a Display model (id=screen.name(), label, width, height, x, y, is_primary, scale_factor) in src/recorder/display_enumerator.py
+- [x] T017 [US1] Implement ScreenRecorder.__init__(settings), status (RecordingStatus property), current_recording (Recording | None property), elapsed_seconds (float property) in src/recorder/screen_recorder.py
+- [x] T018 [US1] Implement ScreenRecorder.start(display: Display): validate save_directory writable, build FFmpeg args for platform (gdigrab offset+size on Windows; avfoundation display index on macOS), spawn subprocess, set Recording with start_time, transition to RECORDING, emit status_changed in src/recorder/screen_recorder.py
+- [x] T019 [US1] Implement ScreenRecorder.stop(): send SIGTERM to FFmpeg subprocess, await exit, set end_time, transition to COMPLETE (exit 0) or FAILED (exit non-zero) or PARTIAL (file > 0 bytes on unexpected termination), emit status_changed and recording_completed in src/recorder/screen_recorder.py
+- [x] T020 [US1] Implement elapsed timer: QTimer(interval=1000) started on RECORDING, stopped on any terminal state, emitting elapsed_updated(float) signal each tick in src/recorder/screen_recorder.py
+- [x] T021 [US1] Implement unexpected-termination handler: monitor FFmpeg subprocess exit while in RECORDING state (QTimer or QProcess), transition to PARTIAL if file > 0 bytes, emit error_occurred with message in src/recorder/screen_recorder.py
+- [x] T022 [US1] Implement MainWindow skeleton in src/ui/main_window.py: status indicator (QLabel with colored dot — grey=Idle, red=Recording, orange=Stopping), elapsed timer label (QLabel, MM:SS format, resets to 00:00 on IDLE), Start/Stop QPushButton following UI state machine from contracts/ui-states.md
+- [x] T023 [US1] Wire ScreenRecorder Qt signals to MainWindow: status_changed → update indicator label + button text/enabled state; elapsed_updated → update timer label; recording_completed → log completion in src/ui/main_window.py
+- [x] T024 [US1] Implement error dialog handler in MainWindow: on error_occurred signal, show QMessageBox.critical with the message, log structured event (event, message, recording_id, timestamp) in src/ui/main_window.py
+- [x] T025 [US1] Implement src/main.py: create QApplication, instantiate SettingsManager and call load(), instantiate ScreenRecorder(settings), instantiate MainWindow(recorder, settings_manager), show window, call app.exec()
 
 **Checkpoint**: User Story 1 is fully functional. Launch the app, record, stop — MP4 file appears. Both unit and integration tests pass.
 
@@ -93,14 +93,14 @@ reopen → verify the chosen folder path is shown and a new recording saves ther
 
 ### Tests for User Story 2 ⚠️ Write these first — they MUST FAIL before implementation
 
-- [ ] T026 [P] [US2] Write failing unit tests for save location: SettingsManager correctly persists and restores a custom save_directory path; SettingsManager resets to default when saved path no longer exists in tests/unit/settings/test_settings_manager.py
+- [x] T026 [P] [US2] Write failing unit tests for save location: SettingsManager correctly persists and restores a custom save_directory path; SettingsManager resets to default when saved path no longer exists in tests/unit/settings/test_settings_manager.py
 
 ### Implementation for User Story 2
 
-- [ ] T027 [US2] Add "Choose Folder" QPushButton and save path QLabel to MainWindow layout; disable "Choose Folder" button when status is RECORDING per UI state machine in src/ui/main_window.py
-- [ ] T028 [US2] Implement folder picker handler in MainWindow: on "Choose Folder" click, open QFileDialog.getExistingDirectory pre-seeded with current save_directory; if user confirms and path is writable, accept; if not writable, show inline QLabel warning "This folder is not writable — choose another" in src/ui/main_window.py
-- [ ] T029 [US2] On valid folder selection, call settings_manager.save(updated_settings) and update the save path QLabel to show the new absolute path in src/ui/main_window.py
-- [ ] T030 [US2] On app startup in src/main.py, read settings.save_directory; if None or path invalid, call settings_manager.default_save_directory() and save that as the default; pass settings to MainWindow to display on startup in src/main.py
+- [x] T027 [US2] Add "Choose Folder" QPushButton and save path QLabel to MainWindow layout; disable "Choose Folder" button when status is RECORDING per UI state machine in src/ui/main_window.py
+- [x] T028 [US2] Implement folder picker handler in MainWindow: on "Choose Folder" click, open QFileDialog.getExistingDirectory pre-seeded with current save_directory; if user confirms and path is writable, accept; if not writable, show inline QLabel warning "This folder is not writable — choose another" in src/ui/main_window.py
+- [x] T029 [US2] On valid folder selection, call settings_manager.save(updated_settings) and update the save path QLabel to show the new absolute path in src/ui/main_window.py
+- [x] T030 [US2] On app startup in src/main.py, read settings.save_directory; if None or path invalid, call settings_manager.default_save_directory() and save that as the default; pass settings to MainWindow to display on startup in src/main.py
 
 **Checkpoint**: User Stories 1 AND 2 work independently. Can record to a custom folder that survives restart.
 
@@ -116,17 +116,17 @@ secondary display → record 3s → stop → verify video shows secondary displa
 
 ### Tests for User Story 3 ⚠️ Write these first — they MUST FAIL before implementation
 
-- [ ] T031 [P] [US3] Write failing unit tests for DisplayEnumerator: mock QApplication.screens() with 1 screen → list_displays() returns 1 Display with is_primary=True; mock with 2 screens → returns 2 Displays with correct labels and geometries in tests/unit/recorder/test_display_enumerator.py
-- [ ] T032 [P] [US3] Write failing unit tests for display persistence: SettingsManager saves and restores selected_display_id; resets to None when saved ID is not in the current display list in tests/unit/settings/test_settings_manager.py
+- [x] T031 [P] [US3] Write failing unit tests for DisplayEnumerator: mock QApplication.screens() with 1 screen → list_displays() returns 1 Display with is_primary=True; mock with 2 screens → returns 2 Displays with correct labels and geometries in tests/unit/recorder/test_display_enumerator.py
+- [x] T032 [P] [US3] Write failing unit tests for display persistence: SettingsManager saves and restores selected_display_id; resets to None when saved ID is not in the current display list in tests/unit/settings/test_settings_manager.py
 
 ### Implementation for User Story 3
 
-- [ ] T033 [US3] Add display selector QComboBox to MainWindow; show only when DisplayEnumerator.list_displays() returns more than 1 display; hide (not just disable) when only 1 display is connected in src/ui/main_window.py
-- [ ] T034 [US3] Populate display selector on startup: call DisplayEnumerator.list_displays(), populate QComboBox with Display.label values, restore previously saved display selection from settings.selected_display_id (fall back to primary if ID not found) in src/ui/main_window.py
-- [ ] T035 [US3] Connect QApplication.screenAdded and QApplication.screenRemoved to a re-enumerate handler that repopulates the display selector and shows/hides it based on count in src/ui/main_window.py
-- [ ] T036 [US3] On display selection change, persist the selected display's id via settings_manager.save(updated_settings) in src/ui/main_window.py
-- [ ] T037 [US3] On recording Start, read the selected Display from the QComboBox (or use the single display when selector is hidden) and pass it to ScreenRecorder.start(display) in src/ui/main_window.py
-- [ ] T038 [US3] Handle monitor-unplugged mid-recording: in the screenRemoved handler, if currently RECORDING, call ScreenRecorder's internal _handle_display_lost() which emits error_occurred("Display disconnected during recording — recording stopped") and transitions to PARTIAL state in src/recorder/screen_recorder.py
+- [x] T033 [US3] Add display selector QComboBox to MainWindow; show only when DisplayEnumerator.list_displays() returns more than 1 display; hide (not just disable) when only 1 display is connected in src/ui/main_window.py
+- [x] T034 [US3] Populate display selector on startup: call DisplayEnumerator.list_displays(), populate QComboBox with Display.label values, restore previously saved display selection from settings.selected_display_id (fall back to primary if ID not found) in src/ui/main_window.py
+- [x] T035 [US3] Connect QApplication.screenAdded and QApplication.screenRemoved to a re-enumerate handler that repopulates the display selector and shows/hides it based on count in src/ui/main_window.py
+- [x] T036 [US3] On display selection change, persist the selected display's id via settings_manager.save(updated_settings) in src/ui/main_window.py
+- [x] T037 [US3] On recording Start, read the selected Display from the QComboBox (or use the single display when selector is hidden) and pass it to ScreenRecorder.start(display) in src/ui/main_window.py
+- [x] T038 [US3] Handle monitor-unplugged mid-recording: in the screenRemoved handler, if currently RECORDING, call ScreenRecorder's internal _handle_display_lost() which emits error_occurred("Display disconnected during recording — recording stopped") and transitions to PARTIAL state in src/recorder/screen_recorder.py
 
 **Checkpoint**: All 3 user stories work independently. Multi-monitor selection is persisted and restored.
 
@@ -137,12 +137,12 @@ secondary display → record 3s → stop → verify video shows secondary displa
 **Purpose**: Robustness, observability, distribution, and accessibility improvements
 affecting all stories.
 
-- [ ] T039 [P] Add structured Python logging throughout ScreenRecorder lifecycle events: recording started (display, save_path), recording stopped (duration, status), DiskSpaceError, FFmpeg crash (exit code, stderr tail) — use logging.getLogger(__name__) with JSON-compatible field names in src/recorder/screen_recorder.py
-- [ ] T040 [P] Implement pre-recording disk space check: before spawning FFmpeg, call shutil.disk_usage(save_directory); if free < 500 MB, raise DiskSpaceError with available bytes in the message in src/recorder/screen_recorder.py
-- [ ] T041 [P] Implement save-folder existence check in MainWindow before each recording start: if settings.save_directory no longer exists, show QMessageBox prompting user to choose a new folder before proceeding in src/ui/main_window.py
-- [ ] T042 Review MainWindow for WCAG 2.1 AA compliance: set accessible names on all controls (setAccessibleName), verify tab order visits all interactive elements, confirm status label color is not the sole indicator (add text) in src/ui/main_window.py
-- [ ] T043 [P] Create PyInstaller spec file language_review_app.spec: onefile + windowed mode, bundle FFmpeg binary as a data file, include PyQt6 platform plugins for Windows (qwindows.dll) and macOS (libqcocoa.dylib) in language_review_app.spec
-- [ ] T044 Run quickstart.md golden path validation end-to-end (all 7 steps) on both Windows and macOS; document any discrepancies found in specs/001-screen-recorder/quickstart.md
+- [x] T039 [P] Add structured Python logging throughout ScreenRecorder lifecycle events: recording started (display, save_path), recording stopped (duration, status), DiskSpaceError, FFmpeg crash (exit code, stderr tail) — use logging.getLogger(__name__) with JSON-compatible field names in src/recorder/screen_recorder.py
+- [x] T040 [P] Implement pre-recording disk space check: before spawning FFmpeg, call shutil.disk_usage(save_directory); if free < 500 MB, raise DiskSpaceError with available bytes in the message in src/recorder/screen_recorder.py
+- [x] T041 [P] Implement save-folder existence check in MainWindow before each recording start: if settings.save_directory no longer exists, show QMessageBox prompting user to choose a new folder before proceeding in src/ui/main_window.py
+- [x] T042 Review MainWindow for WCAG 2.1 AA compliance: set accessible names on all controls (setAccessibleName), verify tab order visits all interactive elements, confirm status label color is not the sole indicator (add text) in src/ui/main_window.py
+- [x] T043 [P] Create PyInstaller spec file language_review_app.spec: onefile + windowed mode, bundle FFmpeg binary as a data file, include PyQt6 platform plugins for Windows (qwindows.dll) and macOS (libqcocoa.dylib) in language_review_app.spec
+- [x] T044 Run quickstart.md golden path validation end-to-end (all 7 steps) on both Windows and macOS; document any discrepancies found in specs/001-screen-recorder/quickstart.md
 
 ---
 

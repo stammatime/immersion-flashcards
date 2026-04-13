@@ -21,8 +21,8 @@ the golden path end-to-end.
 
 ```bash
 # Clone the repo and enter the project directory
-git clone <repo-url>
-cd language-review-app
+git clone https://github.com/stammatime/immersion-flashcards.git
+cd immersion-flashcards
 
 # Create and activate a virtual environment
 python -m venv .venv
