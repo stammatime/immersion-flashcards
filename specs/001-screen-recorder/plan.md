@@ -77,6 +77,8 @@ src/
 
 tests/
 ├── unit/
+│   ├── app/
+│   │   └── test_single_instance.py  # SingleInstanceLock (Windows mutex + POSIX flock)
 │   ├── recorder/
 │   │   ├── test_screen_recorder.py   # Mocked FFmpeg subprocess tests
 │   │   ├── test_display_enumerator.py
@@ -97,4 +99,7 @@ until a second feature requires extraction.
 
 ## Complexity Tracking
 
-> No violations — table not required.
+| Principle | Deviation | Justification | Recorded Before Implementation? |
+|-----------|-----------|---------------|---------------------------------|
+| II. Incremental & Independent | FR-015 (single-instance lock) is not required by any single user story | Prevents confusing dual-window state that could corrupt a recording-in-progress; cost is ~70 lines; reverting is trivial | ❌ No — added post-tasks as an unplanned addition. Acknowledged here retroactively. |
+| III. Test-First | Tests and implementation for FR-015 committed in same commit (107cbfb) | Tests are structurally complete and cover all paths; Red-Green-Refactor sequence was not formally preserved in git history | ❌ No — deviation acknowledged. Future unplanned additions must follow test-first commit discipline. |

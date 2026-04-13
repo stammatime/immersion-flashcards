@@ -30,7 +30,7 @@ testing of each story.
 - [x] T002 [P] Create requirements.txt with pinned dependencies: PyQt6>=6.6, ffmpeg-python>=0.2 in requirements.txt
 - [x] T003 [P] Create requirements-dev.txt with development dependencies: pytest>=8, pytest-qt>=4, ruff>=0.4 in requirements-dev.txt
 - [x] T004 [P] Create src/ package hierarchy with empty __init__.py files: src/__init__.py, src/recorder/__init__.py, src/settings/__init__.py, src/ui/__init__.py
-- [x] T005 [P] Create tests/ directory hierarchy with empty __init__.py files: tests/__init__.py, tests/unit/__init__.py, tests/unit/recorder/__init__.py, tests/unit/settings/__init__.py, tests/integration/__init__.py
+- [x] T005 [P] Create tests/ directory hierarchy with empty __init__.py files: tests/__init__.py, tests/unit/__init__.py, tests/unit/recorder/__init__.py, tests/unit/settings/__init__.py, tests/unit/app/__init__.py, tests/integration/__init__.py
 - [x] T006 [P] Create tests/conftest.py with a session-scoped QApplication fixture required by all PyQt widget tests
 
 ---
@@ -77,7 +77,7 @@ MP4 in their save folder.
 - [x] T022 [US1] Implement MainWindow skeleton in src/ui/main_window.py: status indicator (QLabel with colored dot — grey=Idle, red=Recording, orange=Stopping), elapsed timer label (QLabel, MM:SS format, resets to 00:00 on IDLE), Start/Stop QPushButton following UI state machine from contracts/ui-states.md
 - [x] T023 [US1] Wire ScreenRecorder Qt signals to MainWindow: status_changed → update indicator label + button text/enabled state; elapsed_updated → update timer label; recording_completed → log completion in src/ui/main_window.py
 - [x] T024 [US1] Implement error dialog handler in MainWindow: on error_occurred signal, show QMessageBox.critical with the message, log structured event (event, message, recording_id, timestamp) in src/ui/main_window.py
-- [x] T025 [US1] Implement src/main.py: create QApplication, instantiate SettingsManager and call load(), instantiate ScreenRecorder(settings), instantiate MainWindow(recorder, settings_manager), show window, call app.exec()
+- [x] T025 [US1] Implement src/main.py: acquire SingleInstanceLock (exit with warning dialog if already running), create QApplication, instantiate SettingsManager and call load(), bootstrap default save_directory if none is set, instantiate ScreenRecorder(settings), instantiate MainWindow(recorder, settings_manager), show window, call app.exec(), release lock on exit
 
 **Checkpoint**: User Story 1 is fully functional. Launch the app, record, stop — MP4 file appears. Both unit and integration tests pass.
 
@@ -137,6 +137,7 @@ secondary display → record 3s → stop → verify video shows secondary displa
 **Purpose**: Robustness, observability, distribution, and accessibility improvements
 affecting all stories.
 
+- [x] T045 [P] Implement SingleInstanceLock in src/main.py: Windows named mutex via ctypes (CreateMutexW / ERROR_ALREADY_EXISTS), POSIX exclusive flock via fcntl; integrate into main() to show QMessageBox.warning and exit(1) if a second instance is detected (FR-015). Unit tests in tests/unit/app/test_single_instance.py cover: first acquire succeeds, second acquire fails while first held, acquire succeeds after release, release is idempotent — for both platform paths. (Tests and implementation committed together — see plan.md Complexity Tracking.)
 - [x] T039 [P] Add structured Python logging throughout ScreenRecorder lifecycle events: recording started (display, save_path), recording stopped (duration, status), DiskSpaceError, FFmpeg crash (exit code, stderr tail) — use logging.getLogger(__name__) with JSON-compatible field names in src/recorder/screen_recorder.py
 - [x] T040 [P] Implement pre-recording disk space check: before spawning FFmpeg, call shutil.disk_usage(save_directory); if free < 500 MB, raise DiskSpaceError with available bytes in the message in src/recorder/screen_recorder.py
 - [x] T041 [P] Implement save-folder existence check in MainWindow before each recording start: if settings.save_directory no longer exists, show QMessageBox prompting user to choose a new folder before proceeding in src/ui/main_window.py
@@ -177,7 +178,7 @@ Foundational: T009, T010–T011 are [P] with T007–T008 (different files). T012
 US1: T014 and T015 are [P] (different test files). T016 is [P] with T017.
 US2: T026 is [P] — write test while implementing US1.
 US3: T031 and T032 are [P] — write both test files together.
-Polish: T039, T040, T041, T043 are all [P] — different files, no inter-dependencies.
+Polish: T039, T040, T041, T043, T045 are all [P] — different files, no inter-dependencies.
 
 ---
 

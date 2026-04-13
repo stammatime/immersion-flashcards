@@ -41,9 +41,13 @@ class TestFullRecordingFlow:
 
         time.sleep(2)
 
+        stop_time = time.monotonic()
         result = recorder.stop()
+        elapsed_to_file = time.monotonic() - stop_time
+
         assert result.status == RecordingStatus.COMPLETE
         assert result.save_path.exists()
+        assert elapsed_to_file <= 5.0, f"SC-002: file not available within 5s of Stop (took {elapsed_to_file:.2f}s)"
         assert result.save_path.suffix == ".mp4"
         assert result.save_path.stat().st_size > 0
         assert result.end_time is not None
