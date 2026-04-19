@@ -22,7 +22,6 @@ from PyQt6.QtWidgets import (
 from src.recorder.display_enumerator import DisplayEnumerator
 from src.recorder.models import Display, RecordingStatus
 from src.recorder.screen_recorder import ScreenRecorder
-from src.settings.models import Settings
 from src.settings.settings_manager import SettingsManager
 
 logger = logging.getLogger(__name__)
