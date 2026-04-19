@@ -100,8 +100,9 @@ display content only.
 - What happens when the save folder is deleted while the app is running? The application MUST
   detect this before starting a new recording and prompt the user to choose a new location.
 - What happens when the display configuration changes mid-recording (monitor unplugged)? The
-  application MUST continue recording from the remaining display and notify the user of the
-  change.
+  application MUST stop the active recording gracefully, preserve any captured footage as a
+  partial file (per FR-014), and notify the user that the recording was stopped due to a
+  display disconnection.
 - What happens when the user launches the application while it is already running?
   The second launch MUST show a brief "already running" notice and exit immediately —
   it MUST NOT open a second window or silently fail.
@@ -132,14 +133,24 @@ display content only.
   select which display to record.
 - **FR-012**: The application MUST persist the user's chosen display selection between
   sessions.
-- **FR-013**: The application MUST notify the user with a clear message if recording cannot
-  start (e.g., invalid save folder, insufficient disk space, permission denied).
+- **FR-013**: The application MUST notify the user with a message if recording cannot start
+  (e.g., invalid save folder, insufficient disk space, permission denied). The message MUST
+  state: (1) what went wrong, (2) the affected resource if applicable (folder path, display
+  name), and (3) a corrective action the user can take.
 - **FR-014**: The application MUST preserve any footage already captured if a recording is
-  interrupted unexpectedly (system sleep, crash, disk full).
+  interrupted unexpectedly (system sleep, crash, disk full). A preserved partial file MUST
+  be playable in VLC media player without manual remuxing; container finalization is
+  best-effort.
 - **FR-015**: The application MUST prevent more than one instance from running
   simultaneously. If a second instance is launched while one is already running,
   it MUST display a clear message to the user and exit without opening a second window.
   *(Edge-case-derived — no primary user story; see Edge Cases section.)*
+- **FR-016**: All interactive controls (buttons, dropdowns, dialogs) MUST be operable
+  via keyboard alone, with a visible focus indicator on each control.
+- **FR-017**: All interactive UI elements MUST have programmatic accessible names
+  (e.g., via platform accessibility APIs) so that screen readers can identify them.
+- **FR-018**: The recording status indicator MUST NOT rely on color alone to convey
+  state. A text label (e.g., "Idle", "Recording") MUST accompany the colored dot.
 
 ### Key Entities
 

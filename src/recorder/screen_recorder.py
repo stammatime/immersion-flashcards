@@ -7,7 +7,7 @@ import shutil
 import subprocess
 import sys
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from PyQt6.QtCore import QObject, QTimer, pyqtSignal
@@ -93,7 +93,7 @@ class ScreenRecorder(QObject):
         output_path = save_dir / f"recording_{timestamp}.mp4"
 
         recording_id = str(uuid.uuid4())
-        start_time = datetime.now(tz=timezone.utc)
+        start_time = datetime.now(tz=UTC)
 
         self._current_recording = Recording(
             id=recording_id,
@@ -155,7 +155,7 @@ class ScreenRecorder(QObject):
             )
             self._process.kill()
             exit_code = self._process.wait()
-        end_time = datetime.now(tz=timezone.utc)
+        end_time = datetime.now(tz=UTC)
         duration = (end_time - self._current_recording.start_time).total_seconds()
 
         if exit_code == 0:
@@ -327,7 +327,7 @@ class ScreenRecorder(QObject):
         self._watchdog_timer.stop()
 
         assert self._current_recording is not None
-        end_time = datetime.now(tz=timezone.utc)
+        end_time = datetime.now(tz=UTC)
         duration = (end_time - self._current_recording.start_time).total_seconds()
         self._current_recording.end_time = end_time
         self._current_recording.duration_seconds = duration
