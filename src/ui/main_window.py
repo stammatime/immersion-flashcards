@@ -15,6 +15,7 @@ from PyQt6.QtWidgets import (
     QMainWindow,
     QMessageBox,
     QPushButton,
+    QTabWidget,
     QVBoxLayout,
     QWidget,
 )
@@ -23,6 +24,7 @@ from src.recorder.display_enumerator import DisplayEnumerator
 from src.recorder.models import Display, RecordingStatus
 from src.recorder.screen_recorder import ScreenRecorder
 from src.settings.settings_manager import SettingsManager
+from src.ui.extraction_panel import ExtractionPanel
 
 logger = logging.getLogger(__name__)
 
@@ -64,7 +66,7 @@ class MainWindow(QMainWindow):
         self._enumerator = DisplayEnumerator()
         self._displays: list[Display] = []
 
-        self.setWindowTitle("Language Review — Screen Recorder")
+        self.setWindowTitle("Language Review")
         self.setMinimumWidth(480)
 
         self._build_ui()
@@ -80,7 +82,16 @@ class MainWindow(QMainWindow):
     def _build_ui(self) -> None:
         central = QWidget()
         self.setCentralWidget(central)
-        layout = QVBoxLayout(central)
+        outer_layout = QVBoxLayout(central)
+        outer_layout.setContentsMargins(0, 0, 0, 0)
+
+        self._tab_widget = QTabWidget()
+        self._tab_widget.setAccessibleName("Main feature tabs")
+        outer_layout.addWidget(self._tab_widget)
+
+        # --- Recorder tab ---
+        recorder_tab = QWidget()
+        layout = QVBoxLayout(recorder_tab)
         layout.setSpacing(12)
         layout.setContentsMargins(16, 16, 16, 16)
 
@@ -128,6 +139,12 @@ class MainWindow(QMainWindow):
         self._record_btn.setAccessibleName("Start or stop recording")
         self._record_btn.setMinimumHeight(40)
         layout.addWidget(self._record_btn)
+
+        self._tab_widget.addTab(recorder_tab, "Recorder")
+
+        # --- Extraction tab ---
+        self._extraction_panel = ExtractionPanel()
+        self._tab_widget.addTab(self._extraction_panel, "Text Extraction")
 
     # ------------------------------------------------------------------
     # Signal wiring

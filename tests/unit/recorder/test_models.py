@@ -3,8 +3,7 @@
 Run before implementing src/recorder/models.py — all tests must fail first.
 """
 
-import pytest
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from src.recorder.models import Display, Recording, RecordingStatus
@@ -54,7 +53,7 @@ class TestRecording:
     def test_create_idle_recording(self):
         r = Recording(
             id="test-uuid",
-            start_time=datetime.now(tz=timezone.utc),
+            start_time=datetime.now(tz=UTC),
             end_time=None,
             duration_seconds=None,
             save_path=Path("/tmp/recording_20260412_143022.mp4"),
@@ -67,8 +66,8 @@ class TestRecording:
         assert r.status == RecordingStatus.RECORDING
 
     def test_completed_recording_has_duration(self):
-        start = datetime(2026, 4, 12, 14, 30, 0, tzinfo=timezone.utc)
-        end = datetime(2026, 4, 12, 14, 30, 42, tzinfo=timezone.utc)
+        start = datetime(2026, 4, 12, 14, 30, 0, tzinfo=UTC)
+        end = datetime(2026, 4, 12, 14, 30, 42, tzinfo=UTC)
         r = Recording(
             id="test-uuid",
             start_time=start,
@@ -85,7 +84,7 @@ class TestRecording:
     def test_partial_recording_flag(self):
         r = Recording(
             id="test-uuid",
-            start_time=datetime.now(tz=timezone.utc),
+            start_time=datetime.now(tz=UTC),
             end_time=None,
             duration_seconds=None,
             save_path=Path("/tmp/recording.mp4"),

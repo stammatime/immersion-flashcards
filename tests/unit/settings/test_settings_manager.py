@@ -5,7 +5,6 @@ Run before implementing src/settings/settings_manager.py — tests must fail fir
 
 import json
 import sys
-import pytest
 from pathlib import Path
 
 from src.settings.models import Settings

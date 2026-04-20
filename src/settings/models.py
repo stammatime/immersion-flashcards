@@ -33,3 +33,15 @@ class Settings:
 
     Used for future settings schema migration.
     """
+
+    default_learning_language: str | None = field(default=None)
+    """Default learning language for text extraction (e.g. 'japanese', 'chinese_simplified').
+
+    None means the user must select each time.
+    """
+
+    extraction_output_directory: str | None = field(default=None)
+    """Default output directory for extraction results.
+
+    None means use a subdirectory next to the source video.
+    """

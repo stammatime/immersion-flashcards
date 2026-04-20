@@ -19,11 +19,11 @@
 
 **Purpose**: Install new dependencies and create module structure for extractor and anki packages
 
-- [ ] T001 Add new dependencies (manga-ocr, paddleocr, paddlepaddle, genanki, imagehash, Pillow) to requirements.txt
-- [ ] T002 Create extractor module structure: src/extractor/__init__.py, src/extractor/models.py, src/extractor/exceptions.py, src/extractor/frame_sampler.py, src/extractor/ocr_engine.py, src/extractor/language_detector.py, src/extractor/text_deduplicator.py, src/extractor/transcript_writer.py
-- [ ] T003 [P] Create anki module structure: src/anki/__init__.py, src/anki/models.py, src/anki/deck_builder.py, src/anki/exporter.py
-- [ ] T004 [P] Create test directory structure: tests/unit/extractor/, tests/unit/anki/, tests/fixtures/sample_frames/, tests/fixtures/expected_outputs/
-- [ ] T005 [P] Add sample test fixture images to tests/fixtures/sample_frames/ (japanese_dialogue.png, chinese_menu.png, english_ui.png, mixed_language.png, no_text.png)
+- [x] T001 Add new dependencies (manga-ocr, paddleocr, paddlepaddle, genanki, imagehash, Pillow) to requirements.txt
+- [x] T002 Create extractor module structure: src/extractor/__init__.py, src/extractor/models.py, src/extractor/exceptions.py, src/extractor/frame_sampler.py, src/extractor/ocr_engine.py, src/extractor/language_detector.py, src/extractor/text_deduplicator.py, src/extractor/transcript_writer.py
+- [x] T003 [P] Create anki module structure: src/anki/__init__.py, src/anki/models.py, src/anki/deck_builder.py, src/anki/exporter.py
+- [x] T004 [P] Create test directory structure: tests/unit/extractor/, tests/unit/anki/, tests/fixtures/sample_frames/, tests/fixtures/expected_outputs/
+- [x] T005 [P] Add sample test fixture images to tests/fixtures/sample_frames/ (japanese_dialogue.png, chinese_menu.png, english_ui.png, mixed_language.png, no_text.png)
 
 ---
 
@@ -33,15 +33,15 @@
 
 **CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T006 Write failing tests for LearningLanguage enum and ExtractionConfig dataclass in tests/unit/extractor/test_models.py
-- [ ] T007 Implement LearningLanguage enum and ExtractionConfig dataclass in src/extractor/models.py
-- [ ] T008 [P] Write failing tests for TextEntry dataclass validation in tests/unit/extractor/test_models.py
-- [ ] T009 [P] Implement TextEntry dataclass in src/extractor/models.py
-- [ ] T010 Write failing tests for ExtractionStatus enum and ExtractionSession dataclass in tests/unit/extractor/test_models.py
-- [ ] T011 Implement ExtractionStatus enum and ExtractionSession dataclass in src/extractor/models.py
-- [ ] T012 [P] Write failing tests for FlashcardEntry and DeckMetadata dataclasses in tests/unit/anki/test_models.py
-- [ ] T013 [P] Implement FlashcardEntry and DeckMetadata dataclasses in src/anki/models.py
-- [ ] T014 Implement exception classes (OCREngineError, NoTextDetectedError, ExtractionError) in src/extractor/exceptions.py
+- [x] T006 Write failing tests for LearningLanguage enum and ExtractionConfig dataclass in tests/unit/extractor/test_models.py
+- [x] T007 Implement LearningLanguage enum and ExtractionConfig dataclass in src/extractor/models.py
+- [x] T008 [P] Write failing tests for TextEntry dataclass validation in tests/unit/extractor/test_models.py
+- [x] T009 [P] Implement TextEntry dataclass in src/extractor/models.py
+- [x] T010 Write failing tests for ExtractionStatus enum and ExtractionSession dataclass in tests/unit/extractor/test_models.py
+- [x] T011 Implement ExtractionStatus enum and ExtractionSession dataclass in src/extractor/models.py
+- [x] T012 [P] Write failing tests for FlashcardEntry and DeckMetadata dataclasses in tests/unit/anki/test_models.py
+- [x] T013 [P] Implement FlashcardEntry and DeckMetadata dataclasses in src/anki/models.py
+- [x] T014 Implement exception classes (OCREngineError, NoTextDetectedError, ExtractionError) in src/extractor/exceptions.py
 
 **Checkpoint**: Foundation ready - all data models and enums in place. User story implementation can now begin.
 
@@ -57,24 +57,24 @@
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T015 [P] [US1] Write failing tests for FrameSampler.sample_frames() and FrameSampler.is_duplicate_frame() in tests/unit/extractor/test_frame_sampler.py
-- [ ] T016 [P] [US1] Write failing tests for OCREngine.__init__() and OCREngine.extract_text() with mocked backends in tests/unit/extractor/test_ocr_engine.py
-- [ ] T017 [P] [US1] Write failing tests for TextDeduplicator.process() and TextDeduplicator.reset() in tests/unit/extractor/test_text_deduplicator.py
-- [ ] T018 [P] [US1] Write failing tests for TranscriptWriter.write() in tests/unit/extractor/test_transcript_writer.py
-- [ ] T019 [P] [US1] Write failing tests for DeckBuilder.add_card() and DeckBuilder.get_metadata() in tests/unit/anki/test_deck_builder.py
-- [ ] T020 [P] [US1] Write failing tests for AnkiExporter.export() in tests/unit/anki/test_exporter.py
+- [x] T015 [P] [US1] Write failing tests for FrameSampler.sample_frames() and FrameSampler.is_duplicate_frame() in tests/unit/extractor/test_frame_sampler.py
+- [x] T016 [P] [US1] Write failing tests for OCREngine.__init__() and OCREngine.extract_text() with mocked backends in tests/unit/extractor/test_ocr_engine.py
+- [x] T017 [P] [US1] Write failing tests for TextDeduplicator.process() and TextDeduplicator.reset() in tests/unit/extractor/test_text_deduplicator.py
+- [x] T018 [P] [US1] Write failing tests for TranscriptWriter.write() in tests/unit/extractor/test_transcript_writer.py
+- [x] T019 [P] [US1] Write failing tests for DeckBuilder.add_card() and DeckBuilder.get_metadata() in tests/unit/anki/test_deck_builder.py
+- [x] T020 [P] [US1] Write failing tests for AnkiExporter.export() in tests/unit/anki/test_exporter.py
 
 ### Implementation for User Story 1
 
-- [ ] T021 [US1] Implement FrameSampler.sample_frames() using FFmpeg scene-change detection in src/extractor/frame_sampler.py
-- [ ] T022 [US1] Implement FrameSampler.is_duplicate_frame() using perceptual hashing in src/extractor/frame_sampler.py
-- [ ] T023 [US1] Implement OCREngine wrapping manga-ocr (Japanese) and PaddleOCR (Chinese/English) in src/extractor/ocr_engine.py
-- [ ] T024 [US1] Implement TextDeduplicator with exact-match deduplication in src/extractor/text_deduplicator.py
-- [ ] T025 [US1] Implement TranscriptWriter producing chronological [HH:MM:SS] [LANG] format in src/extractor/transcript_writer.py
-- [ ] T026 [US1] Implement DeckBuilder with genanki note model (Front, Back, Language, Timestamp fields) in src/anki/deck_builder.py
-- [ ] T027 [US1] Implement AnkiExporter.export() producing .apkg with embedded screenshot media in src/anki/exporter.py
-- [ ] T028 [US1] Write failing integration test for end-to-end extraction flow (sample frames -> OCR -> dedup -> transcript + .apkg) in tests/integration/test_extraction_flow.py
-- [ ] T029 [US1] Implement extraction pipeline orchestrator that chains FrameSampler -> OCREngine -> TextDeduplicator -> TranscriptWriter -> DeckBuilder -> AnkiExporter in src/extractor/__init__.py or a new src/extractor/pipeline.py
+- [x] T021 [US1] Implement FrameSampler.sample_frames() using FFmpeg scene-change detection in src/extractor/frame_sampler.py
+- [x] T022 [US1] Implement FrameSampler.is_duplicate_frame() using perceptual hashing in src/extractor/frame_sampler.py
+- [x] T023 [US1] Implement OCREngine wrapping manga-ocr (Japanese) and PaddleOCR (Chinese/English) in src/extractor/ocr_engine.py
+- [x] T024 [US1] Implement TextDeduplicator with exact-match deduplication in src/extractor/text_deduplicator.py
+- [x] T025 [US1] Implement TranscriptWriter producing chronological [HH:MM:SS] [LANG] format in src/extractor/transcript_writer.py
+- [x] T026 [US1] Implement DeckBuilder with genanki note model (Front, Back, Language, Timestamp fields) in src/anki/deck_builder.py
+- [x] T027 [US1] Implement AnkiExporter.export() producing .apkg with embedded screenshot media in src/anki/exporter.py
+- [x] T028 [US1] Write failing integration test for end-to-end extraction flow (sample frames -> OCR -> dedup -> transcript + .apkg) in tests/integration/test_extraction_flow.py
+- [x] T029 [US1] Implement extraction pipeline orchestrator that chains FrameSampler -> OCREngine -> TextDeduplicator -> TranscriptWriter -> DeckBuilder -> AnkiExporter in src/extractor/__init__.py or a new src/extractor/pipeline.py
 
 **Checkpoint**: At this point, the core extraction pipeline works end-to-end. A video can be processed and an Anki deck generated via code (no UI yet for extraction, but the pipeline is callable).
 
@@ -88,15 +88,15 @@
 
 ### Tests for User Story 2
 
-- [ ] T030 [P] [US2] Write failing tests for language-filtered extraction: OCREngine initialized per learning language, flashcards generated only for learning language entries in tests/unit/extractor/test_ocr_engine.py
-- [ ] T031 [P] [US2] Write failing tests for multi-language transcript: transcript includes all enabled languages even when flashcards are filtered in tests/unit/extractor/test_transcript_writer.py
+- [x] T030 [P] [US2] Write failing tests for language-filtered extraction: OCREngine initialized per learning language, flashcards generated only for learning language entries in tests/unit/extractor/test_ocr_engine.py
+- [x] T031 [P] [US2] Write failing tests for multi-language transcript: transcript includes all enabled languages even when flashcards are filtered in tests/unit/extractor/test_transcript_writer.py
 
 ### Implementation for User Story 2
 
-- [ ] T032 [US2] Implement language-based OCR engine selection in extraction pipeline (manga-ocr for JA, PaddleOCR for ZH/EN) in src/extractor/ocr_engine.py
-- [ ] T033 [US2] Implement learning language filtering in pipeline: only first-occurrence entries in the learning language become flashcards in src/extractor/pipeline.py
-- [ ] T034 [US2] Implement additional_languages support in pipeline: run secondary OCR engines for transcript capture without generating flashcards in src/extractor/pipeline.py
-- [ ] T035 [US2] Add learning_language validation to ExtractionConfig (must be set, no default) in src/extractor/models.py
+- [x] T032 [US2] Implement language-based OCR engine selection in extraction pipeline (manga-ocr for JA, PaddleOCR for ZH/EN) in src/extractor/ocr_engine.py
+- [x] T033 [US2] Implement learning language filtering in pipeline: only first-occurrence entries in the learning language become flashcards in src/extractor/pipeline.py
+- [x] T034 [US2] Implement additional_languages support in pipeline: run secondary OCR engines for transcript capture without generating flashcards in src/extractor/pipeline.py
+- [x] T035 [US2] Add learning_language validation to ExtractionConfig (must be set, no default) in src/extractor/models.py
 
 **Checkpoint**: Extraction pipeline respects language selection. Flashcards are learning-language-only, transcript captures all enabled languages.
 
@@ -110,12 +110,12 @@
 
 ### Tests for User Story 3
 
-- [ ] T036 [P] [US3] Write failing tests for transcript formatting: verify [HH:MM:SS] [LANG] format, chronological ordering, all entries included in tests/unit/extractor/test_transcript_writer.py
+- [x] T036 [P] [US3] Write failing tests for transcript formatting: verify [HH:MM:SS] [LANG] format, chronological ordering, all entries included in tests/unit/extractor/test_transcript_writer.py
 
 ### Implementation for User Story 3
 
-- [ ] T037 [US3] Enhance TranscriptWriter to format timestamps as HH:MM:SS, include language tag per entry, and sort by timestamp in src/extractor/transcript_writer.py
-- [ ] T038 [US3] Ensure pipeline writes transcript to output_directory with descriptive filename (e.g., video_name_transcript.txt) in src/extractor/pipeline.py
+- [x] T037 [US3] Enhance TranscriptWriter to format timestamps as HH:MM:SS, include language tag per entry, and sort by timestamp in src/extractor/transcript_writer.py
+- [x] T038 [US3] Ensure pipeline writes transcript to output_directory with descriptive filename (e.g., video_name_transcript.txt) in src/extractor/pipeline.py
 
 **Checkpoint**: Transcript file is produced alongside the .apkg and contains a complete chronological record of all detected text.
 
@@ -129,14 +129,14 @@
 
 ### Tests for User Story 4
 
-- [ ] T039 [P] [US4] Write failing tests for screenshot capture: verify screenshot is saved for each first-occurrence entry, path is associated with FlashcardEntry in tests/unit/extractor/test_frame_sampler.py
-- [ ] T040 [P] [US4] Write failing tests for screenshot embedding in .apkg: verify media files are included and card back HTML references correct image filename in tests/unit/anki/test_exporter.py
+- [x] T039 [P] [US4] Write failing tests for screenshot capture: verify screenshot is saved for each first-occurrence entry, path is associated with FlashcardEntry in tests/unit/extractor/test_frame_sampler.py
+- [x] T040 [P] [US4] Write failing tests for screenshot embedding in .apkg: verify media files are included and card back HTML references correct image filename in tests/unit/anki/test_exporter.py
 
 ### Implementation for User Story 4
 
-- [ ] T041 [US4] Implement screenshot saving in pipeline: copy the source frame image for each first-occurrence entry to output_directory/media/ with unique filename in src/extractor/pipeline.py
-- [ ] T042 [US4] Wire screenshot_path into FlashcardEntry and generate back_html with `<img src="filename.png">` tag in src/anki/deck_builder.py
-- [ ] T043 [US4] Update AnkiExporter to include all screenshot media files in the .apkg package via genanki.Package(media_files=[...]) in src/anki/exporter.py
+- [x] T041 [US4] Implement screenshot saving in pipeline: copy the source frame image for each first-occurrence entry to output_directory/media/ with unique filename in src/extractor/pipeline.py
+- [x] T042 [US4] Wire screenshot_path into FlashcardEntry and generate back_html with `<img src="filename.png">` tag in src/anki/deck_builder.py
+- [x] T043 [US4] Update AnkiExporter to include all screenshot media files in the .apkg package via genanki.Package(media_files=[...]) in src/anki/exporter.py
 
 **Checkpoint**: Flashcards in Anki display screenshots. The full extraction-to-Anki pipeline is complete.
 
@@ -150,18 +150,18 @@
 
 ### Tests for User Story UI
 
-- [ ] T044 [P] [US-UI] Write failing tests for ExtractionPanel state machine (IDLE -> CONFIGURED -> PROCESSING -> COMPLETE/ERROR) in tests/unit/ui/test_extraction_panel.py
-- [ ] T045 [P] [US-UI] Write failing tests for ExtractionPanel accessibility: labels, keyboard navigation, screen reader support in tests/unit/ui/test_extraction_panel.py
+- [x] T044 [P] [US-UI] Write failing tests for ExtractionPanel state machine (IDLE -> CONFIGURED -> PROCESSING -> COMPLETE/ERROR) in tests/unit/ui/test_extraction_panel.py
+- [x] T045 [P] [US-UI] Write failing tests for ExtractionPanel accessibility: labels, keyboard navigation, screen reader support in tests/unit/ui/test_extraction_panel.py
 
 ### Implementation for UI
 
-- [ ] T046 [US-UI] Create ExtractionPanel widget with video file picker, learning language dropdown, additional language checkboxes, and Extract button in src/ui/extraction_panel.py
-- [ ] T047 [US-UI] Implement progress panel in ExtractionPanel: progress bar, status label, cancel button; update during PROCESSING state in src/ui/extraction_panel.py
-- [ ] T048 [US-UI] Implement results panel in ExtractionPanel: card count, transcript path link, .apkg path link, low-confidence count, Open in Anki button in src/ui/extraction_panel.py
-- [ ] T049 [US-UI] Implement state machine transitions (IDLE/CONFIGURED/PROCESSING/COMPLETE/ERROR) per contracts/ui-extraction.md in src/ui/extraction_panel.py
-- [ ] T050 [US-UI] Integrate ExtractionPanel into existing MainWindow (add as tab or panel) in src/ui/main_window.py
-- [ ] T051 [US-UI] Wire ExtractionPanel to extraction pipeline: run pipeline in background thread (QThread), emit progress signals, handle completion/error in src/ui/extraction_panel.py
-- [ ] T052 [US-UI] Implement accessibility requirements: visible labels, keyboard tab order, status announcements per WCAG 2.1 AA in src/ui/extraction_panel.py
+- [x] T046 [US-UI] Create ExtractionPanel widget with video file picker, learning language dropdown, additional language checkboxes, and Extract button in src/ui/extraction_panel.py
+- [x] T047 [US-UI] Implement progress panel in ExtractionPanel: progress bar, status label, cancel button; update during PROCESSING state in src/ui/extraction_panel.py
+- [x] T048 [US-UI] Implement results panel in ExtractionPanel: card count, transcript path link, .apkg path link, low-confidence count, Open in Anki button in src/ui/extraction_panel.py
+- [x] T049 [US-UI] Implement state machine transitions (IDLE/CONFIGURED/PROCESSING/COMPLETE/ERROR) per contracts/ui-extraction.md in src/ui/extraction_panel.py
+- [x] T050 [US-UI] Integrate ExtractionPanel into existing MainWindow (add as tab or panel) in src/ui/main_window.py
+- [x] T051 [US-UI] Wire ExtractionPanel to extraction pipeline: run pipeline in background thread (QThread), emit progress signals, handle completion/error in src/ui/extraction_panel.py
+- [x] T052 [US-UI] Implement accessibility requirements: visible labels, keyboard tab order, status announcements per WCAG 2.1 AA in src/ui/extraction_panel.py
 
 **Checkpoint**: Users can run the full extraction workflow from the GUI.
 
@@ -171,14 +171,14 @@
 
 **Purpose**: Error handling, logging, edge cases, and validation across all stories
 
-- [ ] T053 [P] Add structured logging throughout extraction pipeline (progress, OCR confidence, errors) in src/extractor/pipeline.py
-- [ ] T054 [P] Implement low-confidence flagging: mark entries below confidence_threshold with is_low_confidence=True, add "low-confidence" Anki tag in src/extractor/pipeline.py and src/anki/deck_builder.py
-- [ ] T055 Handle edge case: no text detected in video — produce empty result set with informative message in src/extractor/pipeline.py
-- [ ] T056 Handle edge case: video file not found or unreadable — raise clear error before processing begins in src/extractor/pipeline.py
-- [ ] T057 [P] Add extraction progress reporting: emit frame count, percentage, current phase to UI or console in src/extractor/pipeline.py
-- [ ] T058 Extend Settings dataclass with extraction defaults (default learning language, output directory) in src/settings/models.py
-- [ ] T059 Run quickstart.md golden path validation end-to-end
-- [ ] T060 Run linting (ruff check .) and fix any issues
+- [x] T053 [P] Add structured logging throughout extraction pipeline (progress, OCR confidence, errors) in src/extractor/pipeline.py
+- [x] T054 [P] Implement low-confidence flagging: mark entries below confidence_threshold with is_low_confidence=True, add "low-confidence" Anki tag in src/extractor/pipeline.py and src/anki/deck_builder.py
+- [x] T055 Handle edge case: no text detected in video — produce empty result set with informative message in src/extractor/pipeline.py
+- [x] T056 Handle edge case: video file not found or unreadable — raise clear error before processing begins in src/extractor/pipeline.py
+- [x] T057 [P] Add extraction progress reporting: emit frame count, percentage, current phase to UI or console in src/extractor/pipeline.py
+- [x] T058 Extend Settings dataclass with extraction defaults (default learning language, output directory) in src/settings/models.py
+- [x] T059 Run quickstart.md golden path validation end-to-end
+- [x] T060 Run linting (ruff check .) and fix any issues
 
 ---
 
