@@ -9,7 +9,11 @@
       "Bash(pip show:*)",
       "Bash(python -c \"import PyQt6; print\\(PyQt6.__file__\\)\")",
       "Bash(python -c \"import os; import PyQt6; qt6=os.path.join\\(os.path.dirname\\(PyQt6.__file__\\), 'Qt6'\\); print\\(os.listdir\\(qt6\\)\\)\")",
-      "Bash(python -c \"from PyQt6.QtCore import QObject; print\\('QtCore OK'\\)\")"
+      "Bash(python -c \"from PyQt6.QtCore import QObject; print\\('QtCore OK'\\)\")",
+      "Bash(export PATH=\"$PATH:/c/Program Files/GitHub CLI\")",
+      "Bash(gh pr create --title '001: Screen Recorder' --base main --head 001-screen-recorder --body ':*)",
+      "Bash(.venv/Scripts/python -m pytest tests/unit/test_single_instance.py -v)",
+      "WebSearch"
     ]
   }
 }
