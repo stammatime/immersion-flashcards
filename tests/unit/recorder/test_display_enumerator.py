@@ -6,10 +6,7 @@ requiring physical displays to be connected.
 
 from unittest.mock import MagicMock, patch
 
-import pytest
-
 from src.recorder.display_enumerator import DisplayEnumerator
-from src.recorder.models import Display
 
 
 def _make_mock_screen(name: str, x: int, y: int, w: int, h: int, dpr: float = 1.0):

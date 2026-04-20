@@ -1,2 +1,8 @@
 PyQt6>=6.6.0
 ffmpeg-python>=0.2.0
+manga-ocr>=0.1.8
+paddleocr>=2.7
+paddlepaddle>=2.6
+genanki>=0.13
+imagehash>=4.3
+Pillow>=10.0

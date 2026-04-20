@@ -4,14 +4,11 @@ Run before implementing src/recorder/screen_recorder.py — all tests must fail 
 """
 
 import sys
-import time
-from datetime import datetime, timezone
-from pathlib import Path
-from unittest.mock import MagicMock, patch, PropertyMock
+from unittest.mock import MagicMock, patch
 
 import pytest
 
-from src.recorder.exceptions import DiskSpaceError, FFmpegNotFoundError, RecorderStateError
+from src.recorder.exceptions import DiskSpaceError, RecorderStateError
 from src.recorder.models import Display, RecordingStatus
 from src.settings.models import Settings
 
@@ -83,9 +80,8 @@ class TestScreenRecorderStart:
 
     def test_start_raises_disk_space_error(self, recorder, primary_display):
         with patch("src.recorder.screen_recorder.ScreenRecorder._check_disk_space",
-                   side_effect=DiskSpaceError(100 * 1024 * 1024)):
-            with pytest.raises(DiskSpaceError):
-                recorder.start(primary_display)
+                   side_effect=DiskSpaceError(100 * 1024 * 1024)), pytest.raises(DiskSpaceError):
+            recorder.start(primary_display)
 
     def test_ffmpeg_args_contain_display_geometry_on_windows(self, recorder, primary_display):
         if sys.platform != "win32":
